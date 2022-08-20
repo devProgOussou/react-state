@@ -11,11 +11,11 @@ class App extends React.Component {
         bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget aliquet nunc nisl eget nunc. Donec auctor, nisl eget ultricies tincidunt, nunc nisl aliquam nisl, eget aliquet nunc nisl eget nunc.',
         imgSrc: 'https://www.w3schools.com/howto/img_avatar.png',
       },
-      toggle: false
+      toggle: false,
+      timer: 0
     }
   }
 
-  //start chrono when component is mounted
   componentDidMount() {
     this.timerID = setInterval(
       () => this.tick(),
@@ -23,16 +23,17 @@ class App extends React.Component {
     );
   }
 
-  //stop chrono when component is unmounted
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
 
   tick() {
     this.setState({
-      toggle: !this.state.toggle
+      timer: this.state.timer + 1
     });
   }
+
+
 
 
 
@@ -62,6 +63,8 @@ class App extends React.Component {
                 marginLeft: '45%'
               }} onClick={() => this.setState({ toggle: false })}>Hide</button>
               
+              {/* show timer */}
+              <h1 style={{textAlign: 'center'}}>{this.state.timer} secondes</h1>
             </>
           ) : (
               <button style={{
